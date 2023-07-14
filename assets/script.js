@@ -1,22 +1,22 @@
 var questionsList = [
     {
         question: "question 1",
-        answerOptions: ["1", "2", "3", "4"],
+        answerOptions: ["1.", "2.", "3.", "4."],
         answer: "3"
     },
     {
         question: "question 2",
-        answerOptions: ["1", "2", "3", "4"],
+        answerOptions: ["1.", "2.", "3.", "4."],
         answer: "3"
     },
     {
         question: "question 3",
-        answerOptions: ["1", "2", "3", "4"],
+        answerOptions: ["1.", "2.", "3.", "4."],
         answer: "3"
     },
     {
         question: "question 4",
-        answerOptions: ["1", "2", "3", "4"],
+        answerOptions: ["1.", "2.", "3.", "4."],
         answer: "3"
     }
 ]
@@ -29,6 +29,7 @@ var timerInt;
 var timeEl = document.querySelector("#timer");
 var questionEl = document.querySelector("#question");
 var answerContainer = document.querySelector("#options");
+var initialsInput = document.querySelector("#initials");
 
 function start(){
     timer();
@@ -48,6 +49,7 @@ function timer(){
 }
 
 function displayQuestion(){
+    answerContainer.innerHTML = "";
     var currentQuestion = questionsList[questionIndex];
     questionEl.textContent = currentQuestion.question;
     var answerChoices = currentQuestion.answerOptions;
@@ -74,6 +76,7 @@ function checkAnswer(element){
         score--;
         time-=5;
     }
+    
     questionIndex++;
     if(questionsList.length > questionIndex){
         displayQuestion();
@@ -85,6 +88,17 @@ function checkAnswer(element){
 
 function endQuiz(){
     console.log("end");
+}
+
+function saveScore(){
+    var initials = initialsInput.value.trim();
+    var storedScores = JSON.parse(localStorage.getItem("storedScores")) || [];
+    var newScore = {
+        initials:initials,
+        score:score,
+    }
+    storedScores.push(newScore);
+    localStorage.setItem("storedScores", JSON.stringify(storedScores));
 }
 
 startButton.addEventListener("click",start);
