@@ -30,6 +30,8 @@ var timeEl = document.querySelector("#timer");
 var questionEl = document.querySelector("#question");
 var answerContainer = document.querySelector("#options");
 var initialsInput = document.querySelector("#initials");
+var showEndScreen = document.querySelector(".hide");
+var showQuiz = document.querySelector(".quiz-container");
 
 function start(){
     timer();
@@ -41,7 +43,7 @@ function timer(){
     timerInt = setInterval(function(){
         time --;
         timeEl.textContent = time;
-        if(time <= 0){
+        if(time === 0){
             clearInterval(timerInt);
             endQuiz();
         }
@@ -87,6 +89,9 @@ function checkAnswer(element){
 }
 
 function endQuiz(){
+    clearInterval(timerInt);
+    showQuiz.style.display = 'none';
+    showEndScreen.style.display = 'block';
     console.log("end");
 }
 
