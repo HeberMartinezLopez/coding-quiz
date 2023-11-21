@@ -23,6 +23,7 @@ var questionsList = [
 
 var questionIndex = 0;
 var score = 0;
+var highScore = 0;
 var time = 100;
 var startButton = document.getElementById("start-button");
 var timerInt;
