@@ -1,111 +1,64 @@
-var questionsList = [
+const startBtn = document.getElementById('startBtn');
+const submitBtn = document.getElementById('submitBtn');
+const quiz = document.getElementById('quiz');
+const timer = document.getElementById('timer');
+const questions = document.getElementById('questions');
+const answers = document.getElementById('options');
+const notifications = document.getElementById('notification');
+const end = document.getElementById('end');
+const input = document.getElementById('input');
+const scoreboard = document.getElementById('score');
+const pic = document.getElementById('pic');
+const highscore = document.getElementById('highscores');
+
+
+let highScore = 0;
+let score = 0;
+let questionIndex = 0;
+let time = 100;
+let note;
+
+const questionsList = [
     {
-        question: "question 1",
-        answerOptions: ["1.", "2.", "3.", "4."],
-        answer: "3"
+        question: "What is the purpose of the addEventListener method in JavaScript?",
+        options: [
+            "A. To create a new HTML element.", 
+            "B. To remove an event listener.", 
+            "C. To attach a function to be executed when an event occurs.", 
+            "D. To modify the CSS styles of an element."
+        ],
+        answer: "C. To attach a function to be executed when an event occurs."
     },
     {
-        question: "question 2",
-        answerOptions: ["1.", "2.", "3.", "4."],
-        answer: "3"
+        question: "Which HTML tag is used to create a hyperlink?",
+        options: [
+            "A. <link>",
+            "B. <a>",
+            "C. <url>",
+            "D. <href>"
+        ],
+        answer: "B. <a>"
     },
     {
-        question: "question 3",
-        answerOptions: ["1.", "2.", "3.", "4."],
-        answer: "3"
+        question: "How can you select all paragraphs within a <div> with the class 'content' using CSS?",
+        options: [
+            "A. .content p",
+            "B. div.p",
+            "C. div + p",
+            "D. p.content",
+        ],
+        answer: "A. .content p"
     },
     {
-        question: "question 4",
-        answerOptions: ["1.", "2.", "3.", "4."],
-        answer: "3"
+        question: "In Markdown, how do you create a level 2 heading?",
+        options: [
+            "A. # Heading 2",
+            "B. -- Heading 2 --",
+            "C. === Heading 2 ===",
+            "D. ## Heading 2"
+        ],
+        answer: "D. ## Heading 2"
     }
 ]
 
-var questionIndex = 0;
-var score = 0;
-var highScore = 0;
-var time = 100;
-var startButton = document.getElementById("start-button");
-var timerInt;
-var timeEl = document.querySelector("#timer");
-var questionEl = document.querySelector("#question");
-var answerContainer = document.querySelector("#options");
-var initialsInput = document.querySelector("#initials");
-var showEndScreen = document.querySelector(".hide");
-var showQuiz = document.querySelector(".quiz-container");
-
-function start(){
-    timer();
-    displayQuestion();
-
-}
-
-function timer(){
-    timerInt = setInterval(function(){
-        time --;
-        timeEl.textContent = time;
-        if(time === 0){
-            clearInterval(timerInt);
-            endQuiz();
-        }
-    },1000)
-}
-
-function displayQuestion(){
-    answerContainer.innerHTML = "";
-    var currentQuestion = questionsList[questionIndex];
-    questionEl.textContent = currentQuestion.question;
-    var answerChoices = currentQuestion.answerOptions;
-    for(var i = 0;i < answerChoices.length; i++){
-        var answerEl = document.createElement("li");
-        answerEl.textContent = answerChoices[i];
-        answerContainer.appendChild(answerEl);
-    }
-}
-answerContainer.addEventListener("click",function(e){
-    e.preventDefault();
-    const element = e.target;
-    if(element.matches("li")){
-        checkAnswer(element.textContent);
-    }
-})
-
-function checkAnswer(element){
-    var correctAnswer = questionsList[questionIndex].answer;
-    if(element === correctAnswer){
-        score++;
-    }
-    else{
-        score--;
-        time-=5;
-    }
-    
-    questionIndex++;
-    if(questionsList.length > questionIndex){
-        displayQuestion();
-    }
-    else{
-        endQuiz();
-    }
-}
-
-function endQuiz(){
-    clearInterval(timerInt);
-    showQuiz.style.display = 'none';
-    showEndScreen.style.display = 'block';
-    console.log("end");
-}
-
-function saveScore(){
-    var initials = initialsInput.value.trim();
-    var storedScores = JSON.parse(localStorage.getItem("storedScores")) || [];
-    var newScore = {
-        initials:initials,
-        score:score,
-    }
-    storedScores.push(newScore);
-    localStorage.setItem("storedScores", JSON.stringify(storedScores));
-}
-
-startButton.addEventListener("click",start);
 

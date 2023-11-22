@@ -9,38 +9,39 @@
 
       <body>
         <main>
-          <div class="beginning">
+          <section class="beginning">
             <h1>Code Quiz</h1>
             <button id="startBtn">Start</button>
-          </div>
+          </section>
           
-          <div id="quiz" class="hide">
+          <section id="quiz" class="hide">
             <div>Timer: 
               <span id="timer"> 100</span>
             </div>
-            <h2 id="question"></h2>
+            <h2 id="questions"></h2>
             <ul id="options"></ul>
             <div id="notification"></div>
-          </div>
+          </section>
           
-          <div id="end" class="hide">
+          <section id="end" class="hide">
             <h3>Game Over</h3>
-            <form id="inputForm"><span>Enter initials: </span>
+            <form id="input"><span>Enter initials: </span>
               <input type="text" id="initials">
               <button id="submitBtn">Submit</button>
             </form>
-          </div>
+          </section>
           
-          <div id="highscores" class="hide">
+          <section id="highscores" class="hide">
             <p>Hover over here to reveal high scores</p>
             <div id="pic" class="hide">
               <img src="./assets/img/" alt="">
             </div>
-          </div>
+          </section>
         
-          <div id="score" class="hide">
+          <section id="score" class="hide">
             <img class="sign" src="./assets/img/" alt="">
-          </div>
+          </section>
+
         </main>
         <script src ="./assets/script.js"></script>
       </body>
