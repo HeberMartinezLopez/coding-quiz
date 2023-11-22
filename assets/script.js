@@ -11,13 +11,6 @@ const scoreboard = document.getElementById('score');
 const pic = document.getElementById('pic');
 const highscore = document.getElementById('highscores');
 
-
-let highScore = 0;
-let score = 0;
-let questionIndex = 0;
-let time = 100;
-let note;
-
 const questionsList = [
     {
         question: "What is the purpose of the addEventListener method in JavaScript?",
@@ -61,4 +54,19 @@ const questionsList = [
     }
 ]
 
+let highScore = 0;
+let score = 0;
+let questionIndex = 0;
+let time = 100;
+let note;
 
+const init = () => {
+    window.timerInterval = setInterval(() => {
+        timer.textContent = time;
+        time--;
+        if (time <= 0) {
+            clearInterval(timerInterval);
+            endQuiz();
+        }
+    }, 1000);
+};
