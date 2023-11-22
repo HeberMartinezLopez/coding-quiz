@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+h1{
+    font-size: 3rem;
+}
+
 body{
     background-color: #a9c0a9;
 }
@@ -20,24 +24,13 @@ body{
     width: 100%;
 }
 
-#highscores p{
-    font-size: 1.5rem;
-    text-align: center;
-    text-shadow: 0 0 10px #ffef0e06;
-    padding: 1rem;
-}
+
 
 section{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-}
-
-.highscores{
-    display: flex;
-    flex-direction: row;
-    padding: 1rem;
 }
 
 .beginning{
@@ -47,9 +40,9 @@ section{
 }
 
 #startBtn{
-    background-color: aqua;
+    background-color: white;
     border-radius: 5px;
-    box-shadow: 4px 4px 8px lightcyan;
+    box-shadow: 4px 4px 8px lightseagreen;
     padding: .25rem;
     border-style: none;
 }
@@ -63,9 +56,9 @@ section{
     gap: 1rem;
 }
 
-#question{
+#questions{
     font-size: 2rem;
-    background-color: azure;
+    background-color: #a9c0a9;
     border-radius: 5px;
     padding: .25rem;
     box-shadow: lightsteelblue;
@@ -80,39 +73,49 @@ section{
 
 #options li{
     list-style: none;
-    background-color: lightsteelblue;
-    box-shadow: 4px 4px 8px lightcyan;
+    background-color: #a9c0a9;
+    border-radius: 5px;
 }
 
 #options li:hover{
-    box-shadow: 4px 4px 8px lightgray;
+    box-shadow: 4px 4px 8px white;
     cursor: pointer;
 }
 
 #highscores{
-    background-color: aquamarine;
+    background-color: white;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
 
+#highscores{
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+}
+
+#highscores p{
+    font-size: 1.5rem;
+    text-align: center;
+    text-shadow: 0 0 10px #ffef0e06;
+    padding: 1rem;
+}
 #end{
     padding: 3rem;
-    background-color: azure;
+    background-color: cadetblue;
     box-shadow: 4px 4px 8px lightcyan;
 }
 
 #score{
     display: flex;
-    background-color: aquamarine;
-    box-shadow: 4px 4px 8px lightcyan;
     border-radius: 3px;
     padding: .5rem;
     max-width: 12rem;
     min-width: 10rem;
 }
 
-score li{
+#score li{
     list-style: none;
     font-weight: bolder;
 }

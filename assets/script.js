@@ -3,12 +3,14 @@ const submitBtn = document.getElementById('submitBtn');
 const quiz = document.getElementById('quiz');
 const timer = document.getElementById('timer');
 const questions = document.getElementById('questions');
-const answers = document.getElementById('options');
+const options = document.getElementById('options');
 const notifications = document.getElementById('notification');
 const end = document.getElementById('end');
 const input = document.getElementById('input');
+const form = document.getElementById('input-form');
 const scoreboard = document.getElementById('score');
 const pic = document.getElementById('pic');
+const sign = document.getElementById('sign');
 const highscore = document.getElementById('highscores');
 
 const questionsList = [
@@ -23,14 +25,14 @@ const questionsList = [
         answer: "C. To attach a function to be executed when an event occurs."
     },
     {
-        question: "Which HTML tag is used to create a hyperlink?",
+        question: "What does HTML stand for?",
         options: [
-            "A. <link>",
-            "B. <a>",
-            "C. <url>",
-            "D. <href>"
+            "A. Hyperlink and Text Markup Language",
+            "B. Hypertext Markup Language",
+            "C. High-Level Textual Markup Language",
+            "D. Home Tool Markup Language"
         ],
-        answer: "B. <a>"
+        answer: "B. Hypertext Markup Language"
     },
     {
         question: "How can you select all paragraphs within a <div> with the class 'content' using CSS?",
@@ -70,3 +72,99 @@ const init = () => {
         }
     }, 1000);
 };
+
+const beginQuiz = () => {
+    quiz.classList.remove('hide');
+    init();
+    display();
+};
+
+const display = () => {
+    questions.textContent = questionsList[questionIndex].question;
+
+    let userAnswer = questionsList[questionIndex].options;
+    let answerList = '';
+    for(var i = 0; i < userAnswer.length; i++){
+        answerList += `
+        <li>${userAnswer[i]}</li>
+        `;
+        options.innerHTML = answerList;
+    }
+};
+
+const checkAns = (element) => {
+    const correctAns = questionsList[questionIndex].answer;
+
+    if(element === correctAns){
+        clearTimeout(note);
+        score++;
+        note = setTimeout(() => {
+            notifications.textContent = 'Correct! ✅'
+        }, 1000);
+    } else{
+        clearTimeout(note);
+        score--;
+        time -= 10;
+        note = setTimeout(() => {
+            notifications.textContent = 'Incorrect! ❌'
+        })
+    }
+
+    questionIndex++;
+
+    if (questionsList.length > questionIndex) {
+        display();
+    } else {
+        clearInterval(window.timerInterval);
+        endQuiz();
+    }
+};
+
+const endQuiz = () => {
+    end.classList.remove('hide');
+    quiz.classList.add('hide');
+};
+
+const storeScore = (event) => {
+    event.preventDefault();
+    const initials = input.value.trim();
+    let scores = JSON.parse(localStorage.getItem('scores')) || [];
+
+    let newScore = {
+        initials: initials,
+        score: score
+    };
+
+    scores.push(newScore);
+
+    localStorage.setItem('scores', JSON.stringify(scores));
+    highscore.classList.remove('hide');
+    pic.classList.remove('hide');
+    input.value = '';
+};
+
+const showScore = (event) => {
+    event.preventDefault();
+    scoreboard.classList.remove('hide');
+    
+    let showAllScores = JSON.parse(localStorage.getItem('scores')) || [];
+    let listScores = '';
+    for(var i = 0; i < showAllScores.length; i++){
+        listScores += `
+        <li>${showAllScores[i].initials} : ${showAllScores[i].score}</li>
+        `;
+        scoreboard.innerHTML = listScores;
+    }
+};
+
+pic.addEventListener('mouseover', showScore);
+submitBtn.addEventListener('click', storeScore);
+startBtn.addEventListener('click', beginQuiz)
+options.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    if (event.target.matches('li')) {
+        checkAns(event.target.textContent);
+    }
+});
+
